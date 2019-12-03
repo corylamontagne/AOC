@@ -59,24 +59,13 @@ fn main() {
                 }
                 break;
             }
-            let a : usize = vec[op_index+1];
-            let b : usize = vec[op_index+2];
             let c : usize = vec[op_index+3];
             match op {
                 1 => {
-                    vec[c] = vec[a] + vec[b];
+                    vec[c] = vec[ (vec[op_index+1]) ] + vec[(vec[op_index+2])];
                 }
                 2 => {
-                    vec[c] = vec[a] * vec[b];
-                }
-                99 => {
-                    result = vec[0];
-                    if result > 19690720 {
-                        noun_found = true;
-                        noun -= 1;
-                        result = 0;
-                    }
-                    break;
+                    vec[c] = vec[(vec[op_index+1])] * vec[(vec[op_index+2])];
                 }
                 _ => {
                     result = 0;
