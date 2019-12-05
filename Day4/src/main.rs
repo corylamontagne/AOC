@@ -18,16 +18,17 @@ fn main() {
         let s = start.to_string();
         if in_order(&s) {
             let mut found = true;
-            for i in 0..9 {
+            for i in 0..=9 {
                 let c: Vec<&str> = s.matches( char::from_digit(i as u32, 10).unwrap() ).collect();
-                let l = c.len();
-                if l > 1 && l % 2 == 1 {
+                if c.len() > 1 && c.len() % 2 == 1 {
                     found = false;
-                    println!("{}", s);
                     break;
                 }
             }
-            if found {res += 1;}
+            if found {
+                res += 1;
+                println!("{}", s);
+            }
         }
         start += 1;
     }
