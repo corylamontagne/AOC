@@ -1,4 +1,6 @@
 use std::char;
+extern crate fancy_regex;
+use fancy_regex::Regex;
 
 fn in_order(buf: &String) ->bool {
     let data: Vec<_> = buf.chars().map(|n| n.to_digit(10).unwrap()).collect();
@@ -17,17 +19,9 @@ fn main() {
     while start <= end {
         let s = start.to_string();
         if in_order(&s) {
-            let mut found = true;
-            for i in 0..=9 {
-                let c: Vec<&str> = s.matches( char::from_digit(i as u32, 10).unwrap() ).collect();
-                if c.len() > 1 && c.len() % 2 == 1 {
-                    found = false;
-                    break;
-                }
-            }
-            if found {
-                res += 1;
-                println!("{}", s);
+            let reg_ex = Regex::new(r"(?:^|(.)(?!\1))(\d)\2(?!\2)").unwrap();
+            if reg_ex.is_match(&s).unwrap() { 
+                res+=1; 
             }
         }
         start += 1;
